@@ -19,7 +19,7 @@
 
   const runTimer = () => {
     timerId = setTimeout(() => {
-      // goForward()
+      goForward()
     }, speed * 1000)
   }
 
