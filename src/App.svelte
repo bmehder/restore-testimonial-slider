@@ -47,7 +47,7 @@
       <cite>
         <a href={TESTIMONIALS[testimonialNum].url} target="_blank">
           <span>
-            {#each Array(5) as item}
+            {#each Array(5) as _}
               <i class="fa fa-star" />
             {/each}
           </span>
