@@ -92,7 +92,8 @@
   }
   @media screen and (max-width: 600px) {
     aside {
-      display: none;
+      width: 320px;
+      margin: auto;
     }
   }
 </style>

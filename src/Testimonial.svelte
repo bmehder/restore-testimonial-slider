@@ -19,7 +19,7 @@
 
   const runTimer = () => {
     timerId = setTimeout(() => {
-      goForward()
+      // goForward()
     }, speed * 1000)
   }
 
@@ -89,6 +89,7 @@
   }
   cite {
     text-align: center;
+    margin: auto;
   }
   span {
     display: flex;
@@ -104,8 +105,11 @@
     background: #3fa3a7;
     color: white;
     border-radius: 4px;
-    z-index: 10;
-    cursor: pointer;
     transition: transform 200ms ease-in-out;
+  }
+  @media screen and (max-width: 600px) {
+    blockquote {
+      flex-direction: column;
+    }
   }
 </style>

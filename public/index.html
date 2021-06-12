@@ -8,9 +8,21 @@
 
     <link rel="stylesheet" href="/build/bundle.css" />
     <script defer src="/build/bundle.js"></script>
+    <style>
+      #home-testimonials {
+        width: 600px;
+        margin: 2em auto;
+      }
+      @media screen and (max-width: 600px) {
+        #home-testimonials {
+          width: 100%;
+          margin: 0 auto;
+        }
+      }
+    </style>
   </head>
 
   <body>
-    <div id="home-testimonials" style="width: 600px; margin: 2em auto"></div>
+    <div id="home-testimonials"></div>
   </body>
 </html>
