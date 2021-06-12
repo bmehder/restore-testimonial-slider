@@ -7,24 +7,14 @@
   export let horizontalSlideDirection
   export let speed
   export let timerId
+  export let goForward
 
+  $: thisTestimonial = TESTIMONIALS[testimonialIndex]
   $: isQuote = thisTestimonial.quote
   $: isCitation = thisTestimonial.citation
   $: isURL = thisTestimonial.url
   $: isStars = thisTestimonial.stars
   $: sanatizedStars = Math.floor(thisTestimonial.stars) || 0
-
-  const changeDirection = xNumber => {
-    horizontalSlideDirection = xNumber
-  }
-
-  const goForward = () => {
-    clearTimeout(timerId)
-    changeDirection(-400)
-    testimonialIndex < TESTIMONIALS.length - 1
-      ? (testimonialIndex += 1)
-      : (testimonialIndex = 0)
-  }
 
   const runTimer = () => {
     timerId = setTimeout(() => {

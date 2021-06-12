@@ -3,13 +3,11 @@
   import Testimonial from './Testimonial.svelte'
 
   export let speed = 3
-  export let showNumber = false
+  export let isShowNumber = false
 
   let testimonialIndex = 0
   let horizontalSlideDirection = 400
-  let timerId
-
-  $: thisTestimonial = TESTIMONIALS[testimonialIndex]
+  let timerId = null
 
   const changeDirection = xNumber => {
     horizontalSlideDirection = xNumber
@@ -45,16 +43,16 @@
 <aside>
   <i class="fa fa-angle-left fa-2x" on:click={goBack} />
   <Testimonial
-    {thisTestimonial}
     bind:testimonialIndex
+    bind:timerId
     {horizontalSlideDirection}
     {speed}
-    bind:timerId
+    {goForward}
   />
   <i class="fa fa-angle-right fa-2x" on:click={goForward} />
 </aside>
 
-{#if showNumber}
+{#if isShowNumber}
   <footer>{testimonialIndex + 1 + ' / ' + TESTIMONIALS.length}</footer>
 {/if}
 
