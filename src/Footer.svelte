@@ -5,7 +5,9 @@
 </script>
 
 {#if isShowNumber}
-  <footer>{testimonialIndex + 1 + ' / ' + length}</footer>
+  <footer>
+    {testimonialIndex + 1 + ' / ' + length}
+  </footer>
 {/if}
 
 <style>

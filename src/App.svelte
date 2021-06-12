@@ -10,6 +10,7 @@
   let testimonialIndex = 0
   let horizontalSlideDirection = 400
   let timerId = null
+  let isPaused = false
 
   const changeDirection = xOffset => (horizontalSlideDirection = xOffset)
 
@@ -52,7 +53,12 @@
   <Controls direction="right" on:click={goForward} />
 </aside>
 
-<Footer {isShowNumber} {testimonialIndex} length={TESTIMONIALS.length} />
+<Footer
+  {isShowNumber}
+  {testimonialIndex}
+  {isPaused}
+  length={TESTIMONIALS.length}
+/>
 
 <style>
   aside {

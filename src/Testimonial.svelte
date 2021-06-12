@@ -14,7 +14,6 @@
   $: isQuote = thisTestimonial.quote
   $: isCitation = thisTestimonial.citation
   $: isURL = thisTestimonial.url
-  $: isStars = thisTestimonial.stars
   $: sanatizedStars = Math.floor(thisTestimonial.stars) || 0
 
   const runTimer = () => (timerId = setTimeout(() => goForward(), speed * 1000))
@@ -78,7 +77,7 @@
   }
   cite {
     text-align: center;
-    margin: auto;
+    margin: 0 auto;
   }
   span {
     display: flex;
