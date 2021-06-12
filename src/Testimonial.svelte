@@ -82,9 +82,9 @@
     align-items: center;
     gap: 2px;
     min-width: 100px;
-    margin-top: 0.5em;
+    /* margin-top: 0.5em; */
     padding: 0.5em;
-    background: hsl(182, 45%, 75%);
+    /* background: hsl(182, 45%, 75%); */
     border-radius: 4px;
   }
   i {

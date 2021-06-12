@@ -9,9 +9,7 @@
   let horizontalSlideDirection = 400
   let timerId = null
 
-  const changeDirection = xNumber => {
-    horizontalSlideDirection = xNumber
-  }
+  const changeDirection = xOffset => (horizontalSlideDirection = xOffset)
 
   const goForward = () => {
     clearTimeout(timerId)
@@ -68,13 +66,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 3em;
+    gap: 2em;
     min-height: 150px;
+    padding: 1em;
+    background: hsl(182, 45%, 85%);
+    border: 4px solid hsl(182, 45%, 50%);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.14);
     overflow: hidden;
   }
   i {
     padding: 5px;
-    background: #3fa3a7;
+    /* background: #3fa3a7; */
     color: white;
     border-radius: 4px;
     z-index: 10;
@@ -82,7 +85,7 @@
     transition: transform 200ms ease-in-out;
   }
   i:hover {
-    transform: scale(1.1);
+    transform: scale(1.5);
   }
   footer {
     text-align: center;
