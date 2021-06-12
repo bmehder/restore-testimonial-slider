@@ -17,20 +17,11 @@
   $: isStars = thisTestimonial.stars
   $: sanatizedStars = Math.floor(thisTestimonial.stars) || 0
 
-  const runTimer = () => {
-    timerId = setTimeout(() => {
-      goForward()
-    }, speed * 1000)
-  }
+  const runTimer = () => (timerId = setTimeout(() => goForward(), speed * 1000))
 
-  const handleMouseenter = () => {
-    clearTimeout(timerId)
-    console.log('in')
-  }
+  const handleMouseenter = () => clearTimeout(timerId)
 
-  const handleMouseleave = () => {
-    runTimer()
-  }
+  const handleMouseleave = () => runTimer()
 </script>
 
 {#key testimonialIndex}
@@ -41,7 +32,7 @@
     in:fly={{ x: horizontalSlideDirection, easing: circInOut }}
   >
     {#if isQuote}
-      <p class="quote">"{thisTestimonial.quote}"</p>
+      <p><q>{thisTestimonial.quote}</q></p>
     {/if}
     <cite>
       {#if isURL}
@@ -84,7 +75,7 @@
       Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     font-style: italic;
   }
-  .quote {
+  p:first-child {
     font-size: 1.2em;
   }
   cite {
@@ -100,7 +91,7 @@
     padding: 0.5em;
     border-radius: 4px;
   }
-  i {
+  span i {
     padding: 5px;
     background: #3fa3a7;
     color: white;

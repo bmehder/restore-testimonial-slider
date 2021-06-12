@@ -1,6 +1,8 @@
 <script>
   import { TESTIMONIALS } from './testimonialsData'
   import Testimonial from './Testimonial.svelte'
+  import Controls from './Controls.svelte'
+  import Footer from './Footer.svelte'
 
   export let speed = 3
   export let isShowNumber = false
@@ -39,7 +41,7 @@
 </svelte:head>
 
 <aside>
-  <i class="fa fa-angle-left fa-2x" on:click={goBack} />
+  <Controls direction="left" on:click={goBack} />
   <Testimonial
     bind:testimonialIndex
     bind:timerId
@@ -47,25 +49,20 @@
     {speed}
     {goForward}
   />
-  <i class="fa fa-angle-right fa-2x" on:click={goForward} />
+  <Controls direction="right" on:click={goForward} />
 </aside>
 
-{#if isShowNumber}
-  <footer>{testimonialIndex + 1 + ' / ' + TESTIMONIALS.length}</footer>
-{/if}
+<Footer {isShowNumber} {testimonialIndex} length={TESTIMONIALS.length} />
 
 <style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
   aside {
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 2em;
     min-height: 150px;
+    margin: 0;
     padding: 1em;
     background: hsl(182, 45%, 85%);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -74,21 +71,6 @@
     border-radius: 24px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.14);
     overflow: hidden;
-  }
-  i {
-    padding: 5px;
-    /* background: #3fa3a7; */
-    color: white;
-    border-radius: 4px;
-    z-index: 10;
-    cursor: pointer;
-    transition: transform 200ms ease-in-out;
-  }
-  i:hover {
-    transform: scale(1.5);
-  }
-  footer {
-    text-align: center;
   }
   @media screen and (max-width: 600px) {
     aside {

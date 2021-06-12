@@ -9,11 +9,11 @@ export const TESTIMONIALS = [
   {
     citation: 'Wilbur S.',
     quote: 'Everyone here is always friendly & there to help!',
-    // url: 'https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s108571452321264201323!2s0x0:0xbb5a18beb800bdce?hl=en-VN&shorturl=1',
+    url: 'https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s108571452321264201323!2s0x0:0xbb5a18beb800bdce?hl=en-VN&shorturl=1',
     stars: 4,
   },
   {
-    citation: 'Yo Mama',
+    citation: 'Yoyo Mama',
     quote:
       'Would it save you a lot of time if I just gave up and went mad now?',
     // url: 'https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s108571452321264201323!2s0x0:0xbb5a18beb800bdce?hl=en-VN&shorturl=1',
