@@ -3,22 +3,37 @@
   import { fly } from 'svelte/transition'
 
   export let speed = 3
+  export let showNumber = false
 
-  let testimonialNum = 0
+  let testimonialIndex = 0
+  let horizontalSlideDirection = 400
   let timerId
+
+  $: thisTestimonial = TESTIMONIALS[testimonialIndex]
+  $: isQuote = thisTestimonial.quote
+  $: isCitation = thisTestimonial.citation
+  $: isURL = thisTestimonial.url
+  $: isStars = thisTestimonial.stars
+  $: sanatizedStars = Math.floor(thisTestimonial.stars) || 0
+
+  const changeDirection = xNumber => {
+    horizontalSlideDirection = xNumber
+  }
 
   const goForward = () => {
     clearTimeout(timerId)
-    testimonialNum < TESTIMONIALS.length - 1
-      ? (testimonialNum += 1)
-      : (testimonialNum = 0)
+    changeDirection(-400)
+    testimonialIndex < TESTIMONIALS.length - 1
+      ? (testimonialIndex += 1)
+      : (testimonialIndex = 0)
   }
 
   const goBack = () => {
     clearTimeout(timerId)
-    testimonialNum > 0
-      ? (testimonialNum -= 1)
-      : (testimonialNum = TESTIMONIALS.length - 1)
+    changeDirection(400)
+    testimonialIndex > 0
+      ? (testimonialIndex -= 1)
+      : (testimonialIndex = TESTIMONIALS.length - 1)
   }
 
   const runTimer = () => {
@@ -41,18 +56,32 @@
 <aside>
   <i class="fa fa-angle-left fa-2x" on:click={goBack} />
 
-  {#key testimonialNum}
-    <blockquote use:runTimer in:fly={{ x: 400 }}>
-      <p class="quote">"{TESTIMONIALS[testimonialNum].text}"</p>
+  {#key testimonialIndex}
+    <blockquote use:runTimer in:fly={{ x: horizontalSlideDirection }}>
+      {#if isQuote}
+        <p class="quote">"{thisTestimonial.quote}"</p>
+      {/if}
       <cite>
-        <a href={TESTIMONIALS[testimonialNum].url} target="_blank">
+        {#if isURL}
+          <a href={thisTestimonial.url} target="_blank">
+            {#if isStars}
+              <span>
+                {#each Array(sanatizedStars) as _}
+                  <i class="fa fa-star" />
+                {/each}
+              </span>
+            {/if}
+          </a>
+        {:else if isStars}
           <span>
-            {#each Array(5) as _}
+            {#each Array(sanatizedStars) as _}
               <i class="fa fa-star" />
             {/each}
           </span>
-        </a>
-        <p>{TESTIMONIALS[testimonialNum].name}</p>
+        {/if}
+        {#if isCitation}
+          <p>{thisTestimonial.citation}</p>
+        {/if}
       </cite>
     </blockquote>
   {/key}
@@ -60,20 +89,24 @@
   <i class="fa fa-angle-right fa-2x" on:click={goForward} />
 </aside>
 
+{#if showNumber}
+  <footer>{testimonialIndex + 1 + ' / ' + TESTIMONIALS.length}</footer>
+{/if}
+
 <style>
   * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   }
   aside {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 4em;
+    gap: 3em;
     min-height: 150px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     overflow: hidden;
   }
   blockquote {
@@ -93,9 +126,14 @@
   }
   span {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 2px;
     min-width: 100px;
-    padding-top: 0.5em;
+    margin-top: 0.5em;
+    padding: 0.5em;
+    background: hsl(182, 45%, 75%);
+    border-radius: 4px;
   }
   p {
     margin: 0;
@@ -106,6 +144,14 @@
     color: white;
     border-radius: 4px;
     z-index: 10;
+    cursor: pointer;
+    transition: transform 200ms ease-in-out;
+  }
+  i:hover {
+    transform: scale(1.1);
+  }
+  footer {
+    text-align: center;
   }
   @media screen and (max-width: 600px) {
     aside {
