@@ -1,6 +1,6 @@
 <script>
   import { TESTIMONIALS } from './testimonialsData'
-  import { fly } from 'svelte/transition'
+  import Testimonial from './Testimonial.svelte'
 
   export let speed = 3
   export let showNumber = false
@@ -10,11 +10,6 @@
   let timerId
 
   $: thisTestimonial = TESTIMONIALS[testimonialIndex]
-  $: isQuote = thisTestimonial.quote
-  $: isCitation = thisTestimonial.citation
-  $: isURL = thisTestimonial.url
-  $: isStars = thisTestimonial.stars
-  $: sanatizedStars = Math.floor(thisTestimonial.stars) || 0
 
   const changeDirection = xNumber => {
     horizontalSlideDirection = xNumber
@@ -35,12 +30,6 @@
       ? (testimonialIndex -= 1)
       : (testimonialIndex = TESTIMONIALS.length - 1)
   }
-
-  const runTimer = () => {
-    timerId = setTimeout(() => {
-      goForward()
-    }, speed * 1000)
-  }
 </script>
 
 <svelte:head>
@@ -55,37 +44,13 @@
 
 <aside>
   <i class="fa fa-angle-left fa-2x" on:click={goBack} />
-
-  {#key testimonialIndex}
-    <blockquote use:runTimer in:fly={{ x: horizontalSlideDirection }}>
-      {#if isQuote}
-        <p class="quote">"{thisTestimonial.quote}"</p>
-      {/if}
-      <cite>
-        {#if isURL}
-          <a href={thisTestimonial.url} target="_blank">
-            {#if isStars}
-              <span>
-                {#each Array(sanatizedStars) as _}
-                  <i class="fa fa-star" />
-                {/each}
-              </span>
-            {/if}
-          </a>
-        {:else if isStars}
-          <span>
-            {#each Array(sanatizedStars) as _}
-              <i class="fa fa-star" />
-            {/each}
-          </span>
-        {/if}
-        {#if isCitation}
-          <p>{thisTestimonial.citation}</p>
-        {/if}
-      </cite>
-    </blockquote>
-  {/key}
-
+  <Testimonial
+    {thisTestimonial}
+    bind:testimonialIndex
+    {horizontalSlideDirection}
+    {speed}
+    bind:timerId
+  />
   <i class="fa fa-angle-right fa-2x" on:click={goForward} />
 </aside>
 
@@ -108,35 +73,6 @@
     gap: 3em;
     min-height: 150px;
     overflow: hidden;
-  }
-  blockquote {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 2em;
-    line-height: 1.5;
-    font-style: italic;
-    text-align: justify;
-  }
-  .quote {
-    font-size: 1.2em;
-  }
-  cite {
-    text-align: center;
-  }
-  span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
-    min-width: 100px;
-    margin-top: 0.5em;
-    padding: 0.5em;
-    background: hsl(182, 45%, 75%);
-    border-radius: 4px;
-  }
-  p {
-    margin: 0;
   }
   i {
     padding: 5px;
