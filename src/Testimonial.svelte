@@ -37,15 +37,13 @@
     <cite>
       {#if isURL}
         <a href={thisTestimonial.url} target="_blank">
-          {#if isStars}
-            <span>
-              {#each Array(sanatizedStars) as _}
-                <i class="fa fa-star" />
-              {/each}
-            </span>
-          {/if}
+          <span>
+            {#each Array(sanatizedStars) as _}
+              <i class="fa fa-star" />
+            {/each}
+          </span>
         </a>
-      {:else if isStars}
+      {:else}
         <span>
           {#each Array(sanatizedStars) as _}
             <i class="fa fa-star" />
