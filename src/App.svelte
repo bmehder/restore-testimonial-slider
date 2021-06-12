@@ -59,8 +59,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   }
   aside {
     display: flex;
@@ -70,6 +68,8 @@
     min-height: 150px;
     padding: 1em;
     background: hsl(182, 45%, 85%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     border: 4px solid hsl(182, 45%, 50%);
     border-radius: 24px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.14);
