@@ -1,5 +1,6 @@
 <script>
   import { fly } from 'svelte/transition'
+  import { circInOut } from 'svelte/easing'
   import { TESTIMONIALS } from './testimonialsData'
 
   export let testimonialIndex
@@ -21,10 +22,24 @@
       goForward()
     }, speed * 1000)
   }
+
+  const handleMouseenter = () => {
+    clearTimeout(timerId)
+    console.log('in')
+  }
+
+  const handleMouseleave = () => {
+    runTimer()
+  }
 </script>
 
 {#key testimonialIndex}
-  <blockquote use:runTimer in:fly={{ x: horizontalSlideDirection }}>
+  <blockquote
+    use:runTimer
+    on:mouseenter={handleMouseenter}
+    on:mouseleave={handleMouseleave}
+    in:fly={{ x: horizontalSlideDirection, easing: circInOut }}
+  >
     {#if isQuote}
       <p class="quote">"{thisTestimonial.quote}"</p>
     {/if}
@@ -68,7 +83,6 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
       Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     font-style: italic;
-    text-align: justify;
   }
   .quote {
     font-size: 1.2em;
@@ -82,9 +96,7 @@
     align-items: center;
     gap: 2px;
     min-width: 100px;
-    /* margin-top: 0.5em; */
     padding: 0.5em;
-    /* background: hsl(182, 45%, 75%); */
     border-radius: 4px;
   }
   i {
